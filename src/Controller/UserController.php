@@ -7,7 +7,6 @@ use App\Entity\Token;
 use App\Entity\User;
 use App\Entity\UserRepository;
 use App\Form\Type\UserType;
-use Cassandra\Type\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

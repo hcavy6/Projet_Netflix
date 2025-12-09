@@ -38,6 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::BOOLEAN)]
     private bool $enabled = false;
 
+
     public function __construct()
     {
         $this->tokens = new ArrayCollection();

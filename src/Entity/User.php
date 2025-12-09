@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -27,6 +29,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::STRING)]
     private ?string $username = null;
+
+    private ?string $plainPassword = null;
+
+    #[ORM\OneToMany(targetEntity: Token::class, mappedBy: 'user', cascade: ['persist'])]
+    private Collection $tokens;
+
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $enabled = false;
+
+    public function __construct()
+    {
+        $this->tokens = new ArrayCollection();
+    }
 
     public function getUsername(): ?string
     {
@@ -63,6 +78,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
+    public function getTokens(): Collection
+    {
+        return $this->tokens;
+    }
+
+    public function setTokens(Collection $tokens): void
+    {
+        $this->tokens = $tokens;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
     public function setEmail(?string $email): void
     {
         $this->email = $email;
@@ -80,6 +115,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUserIdentifier(): string
     {
-        return $this->getEmail();
+        return $this->getUsername();
     }
 }

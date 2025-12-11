@@ -9,6 +9,8 @@ use Doctrine\Migrations\AbstractMigration;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
+ *
+ * Add Token and User
  */
 final class Version20251209180331 extends AbstractMigration
 {

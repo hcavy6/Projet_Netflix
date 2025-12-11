@@ -42,7 +42,7 @@ class UserController extends AbstractController
             $email = new Email();
 
             $email
-                ->from('jean.marius@dyosis.com')
+                ->from('pierremartinant60@gmail.com')
                 ->to($user->getEmail())
                 ->text($this->renderBlockView('Mail/validate-email.html.twig', 'text', ['token' => $token]))
                 ->html($this->renderBlockView('Mail/validate-email.html.twig', 'html', ['token' => $token]))
@@ -52,7 +52,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        return $this->render('User/create.html.twig', [
+        return $this->render('user/register.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -60,7 +60,7 @@ class UserController extends AbstractController
     #[Route('/login', name: 'app_login')]
     public function login(AuthenticationUtils $utils): Response
     {
-        return $this->render('User/login.html.twig');
+        return $this->render('user/login.html.twig');
     }
 
     #[Route('/validate/{value}', name: 'app_validate')]

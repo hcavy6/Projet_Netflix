@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Service\ApiClient;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,3 +22,14 @@ class HomeController extends AbstractController
         ]);
     }
 }
+
+//    #[Route('/movies', name: 'app_movies')]
+//    public function movies(ApiClient $tmdbClient): Response
+//    {
+//        $movies = $tmdbClient->getPopularMovies();
+//
+//        return $this->render('movie/index.html.twig', [
+//            'movies' => $movies['results'],
+//        ]);
+//    }
+//}

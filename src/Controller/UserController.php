@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Entity\UserRepository;
 use App\Form\Type\UserType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -61,13 +62,16 @@ class UserController extends AbstractController
     public function login(AuthenticationUtils $utils): Response
     {
         return $this->render('user/login.html.twig');
+
     }
 
     #[Route('/validate/{value}', name: 'app_validate')]
-    public function confirmEmail(Token $token, EntityManagerInterface $entityManager): Response
-    {
+    public function confirmEmail(
+        #[MapEntity(mapping: ['value' => 'value'])] Token $token,
+        EntityManagerInterface $entityManager
+    ): Response {
         if ($token->getExpiresAt() < new \DateTime()) {
-            throw $this->createNotFoundException();
+            throw $this->createNotFoundException('Token expiré');
         }
 
         $user = $token->getUser();

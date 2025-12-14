@@ -117,4 +117,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->getUsername();
     }
+
+    public function addToken(Token $token): self
+    {
+    $token->setUser($this);
+    $this->tokens->add($token);
+    return $this;
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): self
+    {
+        $this->enabled = $enabled;
+        return $this;
+    }
+
 }

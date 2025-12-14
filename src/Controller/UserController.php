@@ -81,6 +81,6 @@ class UserController extends AbstractController
         $entityManager->remove($token);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_login');
+        return $this->redirectToRoute('user_login');
     }
 }

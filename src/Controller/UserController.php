@@ -50,7 +50,7 @@ class UserController extends AbstractController
                 ->subject($this->renderBlockView('Mail/validate-email.html.twig', 'subject', ['token' => $token]));
             $mailer->send($email);
 
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('user_login');
         }
 
         return $this->render('user/register.html.twig', [
@@ -58,7 +58,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/login', name: 'app_login')]
+    #[Route('/login', name: 'user_login')]
     public function login(AuthenticationUtils $utils): Response
     {
         return $this->render('user/login.html.twig');

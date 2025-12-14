@@ -1,10 +1,18 @@
-
 {% block body %}
     {{ form_start(form) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.plainPassword.first, {'label': 'Mot de passe'}) }}
-    {{ form_row(form.plainPassword.second, {'label': 'Confirmer mot de passe'}) }}
-    <input type="submit" value="Submit">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <div class="col-4 mx-auto mt-5 ">
+        <div style="text-align: center;">
+            <h2>Register</h2>
+        </div>
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.plainPassword.first, {'label': 'Mot de passe'}) }}
+        {{ form_row(form.plainPassword.second, {'label': 'Confirmer mot de passe'}) }}
+        <input type="submit" class="btn btn-primary mt-3" value="Submit"><br>
+        <label class="mb-3 col-4" for="">Already an Account :</label>
+        <a class=" btn btn-secondary col-3 mb-3" href="{{ path('user_login') }}">Login</a>
+
+    </div>
     {{ form_end(form) }}
 {% endblock body %}

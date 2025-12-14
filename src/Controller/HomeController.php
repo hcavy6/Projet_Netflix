@@ -21,15 +21,23 @@ class HomeController extends AbstractController
             'users' => $users,
         ]);
     }
+
+
+    #[Route('/', name: 'app_home_index')]
+    public function index(
+    EntityManagerInterface $entityManager,
+    TmdbService $tmdbService // Injection du service
+): Response
+{
+    $users = $entityManager->getRepository(User::class)->findAll();
+
+    // Récupération des films via l'API
+    $moviesData = $tmdbService->getPopularMovies();
+
+    return $this->render('index.html.twig', [
+        'users' => $users,
+        'movies' => $moviesData['results'] ?? [],
+        ]);
+}
 }
 
-//    #[Route('/movies', name: 'app_movies')]
-//    public function movies(ApiClient $tmdbClient): Response
-//    {
-//        $movies = $tmdbClient->getPopularMovies();
-//
-//        return $this->render('movie/index.html.twig', [
-//            'movies' => $movies['results'],
-//        ]);
-//    }
-//}
